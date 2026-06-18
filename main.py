@@ -23,27 +23,23 @@ while True:
     elif opcao == "2":
 
          dados = pd.read_excel("CadastroAcevemistas.xlsx")
-
-         nome = dados.iloc[0]["Nome"]
-         telefone = str(dados.iloc[0]["Telefone"])
-
-         print(f"Enviando mensagem para {nome}")
-
-         mensagem = f"Olá {nome}! Esta é uma mensagem de teste da ACVM."
-
-         print("Telefone:", telefone)
-         print("Mensagem:", mensagem)
          
-         print("CHEGUEI NO PYWHATKIT")
-         print("SAI DO PYWHATKIT")
-         pywhatkit.sendwhatmsg_instantly(
-            "+55" + telefone,
-            mensagem,
-            wait_time=15
-        )
-           
-         time.sleep(5)
-         pyautogui.press("enter")
+         for index, linha in dados.iterrows():
+            nome = linha["Nome"]
+            telefone = str(linha["Telefone"])
+            
+            print(f"\nEnviando para {nome}")
+            
+            mensagem = f"Olá {nome}! Esta é uma mensagem de teste da ACVM"
+            
+            print("Telefone:", telefone)
+            print("Mensagem:", mensagem)
+            
+            pywhatkit.sendwhatmsg_instantly(
+                "+55" + telefone,
+                mensagem,
+                wait_time=15
+            )
             
     elif opcao == "3":
         print("Sistema encerrado.")
